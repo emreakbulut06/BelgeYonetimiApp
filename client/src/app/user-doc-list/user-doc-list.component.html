@@ -1,0 +1,22 @@
+<section class="docs">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Belge Adı</th>
+        <th scope="col">Dosya Yolu</th>
+        <th scope="col">Dosyayı Sil</th>
+        <th scope="col">Dosyayı Göster</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of docs">
+        <td><img src="../../assets/images/adobe.png" alt="icon" style="width:30px; height:30px;"></td>
+        <td>{{doc.documentName}}</td>
+        <td>{{doc.url}}</td>
+        <td><button type="button" class="btn btn-warning"> Sil </button></td>
+        <td><a href="https://localhost:5001/{{doc.url}}" target="_blank">Göster</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Evrak Yönetimi</a>
+    <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/upload" routerLinkActive="active">Belge Yükle</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/all-docs" routerLinkActive="active">Tüm Belgeleri Göster</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user-docs" routerLinkActive="active">Kullanıcıya Ait Belgeleri Göster</a>
+        </li>
+      </ng-container>
+    </ul>
+
+    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Hoşgeldiniz Sayın {{user.username | titlecase}}</a>
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" (click)="logout()">Çıkış</a>
+      </div>
+    </div>
+
+    <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
+      <input name="username"
+             [(ngModel)]="model.username"
+             class="form-control me-2" type="text"
+             placeholder="Kullanıcı Adı">
+      <input name="password"
+             [(ngModel)]="model.password"
+             class="form-control me-2"
+             type="password"
+             placeholder="Şifre">
+      <button class="btn btn-success"
+              type="submit">
+        Login
+      </button>
+    </form>
+    <a class="navbar-brand" *ngIf="!(accountService.currentUser$ | async)" routerLink="/register" routerLinkActive="active">Kayıt Ol</a>
+  </div>
+</nav>

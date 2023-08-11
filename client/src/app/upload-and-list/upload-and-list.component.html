@@ -1,0 +1,46 @@
+<article class="container">
+  <section class="create" *ngIf="isCreate">
+    <h1>Kayıtlı Belge Oluştur</h1>
+    <form>
+      <div class="mb-3">
+        <label for="name">Belge Adı</label>
+        <input type="text" class="form-control" id="documentName" name="documentName"
+               placeholder="Lütfen bir isim giriniz..." [(ngModel)]="documentName">
+      </div>
+      <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+      <div class="row">
+        <div class="offset-md-5 col-md-2">
+          <button type="button" class="btn btn-primary" (click)="onCreate()">Oluştur</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="docs" *ngIf="!isCreate">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <!--<th scope="col">Image</th>-->
+          <th scope="col">Belge Adı</th>
+          <th scope="col">Dosya Yolu</th>
+          <th scope="col">Dosyayı Sil</th>
+          <th scope="col">Dosyayı Göster</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of docs">
+          <td>{{doc.documentName}}</td>
+          <td>{{doc.url}}</td>
+          <td><button type="button" class="btn btn-warning" (click)="returnToCreate()"> Sil </button></td>
+          <td><a href="https://localhost:5001/{{doc.url}}" target="_blank">Göster</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="offset-md-10 col-md-2">
+        <button type="button" class="btn btn-primary" (click)="returnToCreate()">Yeni Belge Yükle</button>
+      </div>
+    </div>
+  </section>
+</article>
